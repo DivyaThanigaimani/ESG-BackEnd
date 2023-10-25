@@ -23,7 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 
 
-@Controller
+@RestController
 @RequestMapping("/upload")
 public class regionController {
     private final regionService excelDataService;
@@ -34,14 +34,13 @@ public class regionController {
     }
 
     @PostMapping("/excel")
-    public ResponseEntity<String> uploadExcelFile(@RequestParam("file") MultipartFile file) {
+    public ResponseEntity<List<EmissionResponse>> uploadExcelFile(@RequestParam("file") MultipartFile file) {
         try {
-            List<regionRequestModel> regionList = ExcelData.readExcel(file.getInputStream());
-            excelDataService.saveExcelData(regionList);
-            return ResponseEntity.ok("File uploaded and data saved successfully.");
+            List<regionDTO> regionList = ExcelData.readExcel(file.getInputStream());
+            List<EmissionResponse> emiList=excelDataService.saveExcelData(regionList);
+            return new ResponseEntity <List<EmissionResponse>>(emiList,HttpStatus.OK);
         } catch (IOException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body("Error occurred while processing the file: " + e.getMessage());
+        	 return null;
         }
     }
 }

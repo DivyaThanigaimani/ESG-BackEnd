@@ -1,43 +1,19 @@
 package com.example.esg.region;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+public class EmissionResponse {
 
-@Entity
-@Table(name="emissiondetails")
-public class regionDTO {
-	 @Id
-	    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	    private Long id;
 	    private String region;
-	    private String company;
 	    private String measures;
 	    private String unit;
 	    private double emission_amt;
-	    
-	
-	    public Long getId() {
-			return id;
-		}
-		public void setId(Long id) {
-			this.id = id;
-		}
+	    private double percent;
+	    private int scope;
 		public String getRegion() {
 			return region;
 		}
 		public void setRegion(String region) {
 			this.region = region;
 		}
-		public String getCompany() {
-			return company;
-		}
-		public void setCompany(String company) {
-			this.company = company;
-		}
-		
 		public String getMeasures() {
 			return measures;
 		}
@@ -56,8 +32,18 @@ public class regionDTO {
 		public void setEmission_amt(double emission_amt) {
 			this.emission_amt = emission_amt;
 		}
-		
-		
+		public double getPercent() {
+			return percent;
+		}
+		public void setPercent(double percent) {
+			this.percent = percent;
+		}
+		public int getScope() {
+			return scope;
+		}
+		public void setScope(int scope) {
+			this.scope = scope;
+		}
 	    
-
+	    
 }

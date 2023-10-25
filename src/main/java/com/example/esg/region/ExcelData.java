@@ -9,8 +9,8 @@ import java.util.Iterator;
 import java.util.List;
 
 public class ExcelData {
-    public static List<regionRequestModel> readExcel(InputStream inputStream) throws IOException {
-        List<regionRequestModel> regionList = new ArrayList<>();
+    public static List<regionDTO> readExcel(InputStream inputStream) throws IOException {
+        List<regionDTO> regionList = new ArrayList<>();
 
         Workbook workbook = new XSSFWorkbook(inputStream);
         Sheet sheet = workbook.getSheetAt(0); // Assuming data is in the first sheet
@@ -20,7 +20,7 @@ public class ExcelData {
             Row currentRow = iterator.next();
             Iterator<Cell> cellIterator = currentRow.iterator();
 
-            regionRequestModel region = new regionRequestModel();
+            regionDTO region = new regionDTO();
             int cellIdx = 0;
             while (cellIterator.hasNext()) {
                 Cell currentCell = cellIterator.next();
@@ -28,27 +28,27 @@ public class ExcelData {
                 switch (cellIdx) {
                     case 0:
                     	if (currentCell.getCellType() == CellType.STRING) 
-                        region.setRegion(currentCell.getStringCellValue());
+                        region.setMeasures(currentCell.getStringCellValue());
                         break;
                     case 1:
                     	if (currentCell.getCellType() == CellType.STRING) 
-                        region.setCompany(currentCell.getStringCellValue());
+                        region.setUnit(currentCell.getStringCellValue());
                         break;
                     case 2:
-                    	if (currentCell.getCellType() == CellType.STRING) 
-                        region.setScope1(currentCell.getStringCellValue());
-                        break;
-                    case 3:
-                    	if (currentCell.getCellType() == CellType.STRING) 
-                        region.setScope2(currentCell.getStringCellValue());
+                    	if (currentCell.getCellType() == CellType.NUMERIC) 
+                        region.setEmission_amt(currentCell.getNumericCellValue());
                         break;
                    
                     default:
                         break;
                 }
+               
                 cellIdx++;
             }
+            region.setCompany("ERT");
+            region.setRegion("Canada");
             regionList.add(region);
+            
         }
         workbook.close();
         return regionList;
