@@ -2,41 +2,28 @@ package com.example.esg.solar;
 
 public class YearlyWise {
 
-	private String fstYear;
-	private String secYear;
-	private String thirdYear;
-	private String fourthYear;
-	private String fifthYear;
-	public String getFstYear() {
-		return fstYear;
+	private QuaterWise nextThreeYears;
+	private QuaterWise nextFiveYears;
+	private QuaterWise nextTenYears;
+	public QuaterWise getNextThreeYears() {
+		return nextThreeYears;
 	}
-	public void setFstYear(String fstYear) {
-		this.fstYear = fstYear;
+	public void setNextThreeYears(QuaterWise nextThreeYears) {
+		this.nextThreeYears = nextThreeYears;
 	}
-	public String getSecYear() {
-		return secYear;
+	public QuaterWise getNextFiveYears() {
+		return nextFiveYears;
 	}
-	public void setSecYear(String secYear) {
-		this.secYear = secYear;
+	public void setNextFiveYears(QuaterWise nextFiveYears) {
+		this.nextFiveYears = nextFiveYears;
 	}
-	public String getThirdYear() {
-		return thirdYear;
+	public QuaterWise getNextTenYears() {
+		return nextTenYears;
 	}
-	public void setThirdYear(String thirdYear) {
-		this.thirdYear = thirdYear;
+	public void setNextTenYears(QuaterWise nextTenYears) {
+		this.nextTenYears = nextTenYears;
 	}
-	public String getFourthYear() {
-		return fourthYear;
-	}
-	public void setFourthYear(String fourthYear) {
-		this.fourthYear = fourthYear;
-	}
-	public String getFifthYear() {
-		return fifthYear;
-	}
-	public void setFifthYear(String fifthYear) {
-		this.fifthYear = fifthYear;
-	}
+	
 	
 	
 	
