@@ -27,8 +27,17 @@ public class SolarController {
         this.solarService = solarService;
     }
 	 @GetMapping("/getCarbonReducedPercentage")
-	public ResponseEntity<SolarResponseModel> getPercentage(@RequestBody SolarRequestModel solarRequest) {
+	public ResponseEntity<SolarResponseModel> getPercentage(@RequestParam(value = "category") String category,
+            @RequestParam(value = "measure") String measure, @RequestParam(value = "country") String country,
+            @RequestParam(value = "province") String province,@RequestParam(value = "region") String region
+            ){
 	    try {
+	    	SolarRequestModel solarRequest=new SolarRequestModel();
+	    	solarRequest.setCategory(category);
+	    	solarRequest.setCountry(country);
+	    	solarRequest.setMeasure(measure);
+	    	solarRequest.setProvince(province);
+	    	solarRequest.setRegion(region);
 	        SolarResponseModel solarResObj = solarService.getPercentage(solarRequest);
 	        return new ResponseEntity <SolarResponseModel>(solarResObj,HttpStatus.OK);
 	    } catch (Exception e) {

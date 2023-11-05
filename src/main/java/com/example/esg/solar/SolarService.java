@@ -19,7 +19,7 @@ public class SolarService {
 		respObj.setCountry(solarObj.getCountry());
 		respObj.setProvince(solarObj.getProvince());
 		respObj.setRegion(solarObj.getRegion());
-		if(requestObj.getCategory().toUpperCase().equals("QUATER")) {
+		if(requestObj.getCategory().toUpperCase().equals("QUATERLY")) {
 			double summerVal=solarObj.getCarbon_intensity()*solarObj.getEnergy_production_summer()*solarObj.getPanel_capacity();
 			double fallVal=solarObj.getCarbon_intensity()*solarObj.getEnergy_production_winter()*solarObj.getPanel_capacity();
 			double winterVal=solarObj.getCarbon_intensity()*solarObj.getEnergy_production_fall()*solarObj.getPanel_capacity();
