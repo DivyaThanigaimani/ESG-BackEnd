@@ -18,14 +18,14 @@ public class LoginService {
 	private RegisterRepository registerRepository;
 	
 	
-	public RegisterDTO authenticate(String userName,String password) {
-		RegisterDTO registeredUser=registerRepository.findByEmailId(userName);
-		//String decodedPassword = new String(Base64.getDecoder().decode(registeredUser.getPassword()));
-		if((registeredUser!=null) && (!registeredUser.getPassword().equals(password))){
-			throw new InvalidDataExceptions("Invalid User Credentials");
-		}
-		return registeredUser;
+	public RegisterDTO authenticate(String userName, String password) {
+	    RegisterDTO registeredUser = registerRepository.findByEmailId(userName);
+	    if (registeredUser == null || !registeredUser.getPassword().equals(password)) {
+	        throw new InvalidDataExceptions("Invalid User Credentials");
+	    }
+	    return registeredUser;
 	}
+
 	
 }
 
