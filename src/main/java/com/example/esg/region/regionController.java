@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -43,5 +44,16 @@ public class regionController {
         	 return null;
         }
     }
+    @GetMapping("/carbonexcel")
+    public ResponseEntity<List<CarbonResponseDTO>> uploadCarbonExcelFile(@RequestParam("file") MultipartFile file) {
+        try {
+            List<CarbonDTO> carbonList = ExcelData.readCarbonExcel(file.getInputStream());
+            List<CarbonResponseDTO> carbList=excelDataService.calculateCarbonData(carbonList);
+            return new ResponseEntity <List<CarbonResponseDTO>>(carbList,HttpStatus.OK);
+        } catch (IOException e) {
+        	 return null;
+        }
+    }
+    
 }
 

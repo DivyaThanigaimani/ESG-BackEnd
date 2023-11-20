@@ -28,7 +28,7 @@ public class ExcelData {
                 switch (cellIdx) {
                     case 0:
                     	if (currentCell.getCellType() == CellType.STRING) 
-                        region.setMeasures(currentCell.getStringCellValue());
+                        region.setMeasures(null);
                         break;
                     case 1:
                     	if (currentCell.getCellType() == CellType.STRING) 
@@ -52,6 +52,48 @@ public class ExcelData {
         }
         workbook.close();
         return regionList;
+    }
+    public static List<CarbonDTO> readCarbonExcel(InputStream inputStream) throws IOException {
+        List<CarbonDTO> carbonList = new ArrayList<>();
+
+        Workbook workbook = new XSSFWorkbook(inputStream);
+        Sheet sheet = workbook.getSheetAt(0); // Assuming data is in the first sheet
+
+        Iterator<Row> iterator = sheet.iterator();
+        while (iterator.hasNext()) {
+            Row currentRow = iterator.next();
+            Iterator<Cell> cellIterator = currentRow.iterator();
+
+            CarbonDTO carbon = new CarbonDTO();
+            int cellIdx = 0;
+            while (cellIterator.hasNext()) {
+                Cell currentCell = cellIterator.next();
+
+                switch (cellIdx) {
+                    case 0:
+                    	if (currentCell.getCellType() == CellType.STRING) 
+                    		carbon.setMeasures(currentCell.getStringCellValue());
+                        break;
+                    case 1:
+                    	if (currentCell.getCellType() == CellType.STRING) 
+                    		carbon.setUnit(currentCell.getStringCellValue());
+                        break;
+                    case 2:
+                    	if (currentCell.getCellType() == CellType.NUMERIC) 
+                    		carbon.setEnergy_spent(currentCell.getNumericCellValue());
+                        break;
+                   
+                    default:
+                        break;
+                }
+               
+                cellIdx++;
+            }
+           
+            carbonList.add(carbon);
+        }
+        workbook.close();
+        return carbonList;
     }
 }
 

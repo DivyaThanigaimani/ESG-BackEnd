@@ -60,5 +60,50 @@ public class regionService {
     	
     }
    
+    public List<CarbonResponseDTO> calculateCarbonData(List<CarbonDTO> carbonList) {
+    	List<CarbonResponseDTO> carbonResList=new ArrayList<>();
+    	
+    	try {
+           
+            for(CarbonDTO res:carbonList) {
+            	CarbonResponseDTO obj=new CarbonResponseDTO();
+            	if(res.getMeasures().toUpperCase().equals("ELECTRICITY")) {
+            		double carbon =0.4 * res.getEnergy_spent();
+            		obj.setCarbon_produced(carbon);
+            		obj.setMeasures(res.getMeasures());
+            		obj.setUnit("Kg");
+            		obj.setEnergy_consumed(res.getEnergy_spent());
+            	}
+            	if(res.getMeasures().toUpperCase().equals("NATURAL GAS")) {
+            		double carbon =55* res.getEnergy_spent();
+            		obj.setCarbon_produced(carbon);
+            		obj.setMeasures(res.getMeasures());
+            		obj.setUnit("Kg");
+            		obj.setEnergy_consumed(res.getEnergy_spent());
+            	}
+            	if(res.getMeasures().toUpperCase().equals("WASTE")) {
+            		double carbon =200 * res.getEnergy_spent();
+            		obj.setCarbon_produced(carbon);
+            		obj.setMeasures(res.getMeasures());
+            		obj.setUnit("Kg");
+            		obj.setEnergy_consumed(res.getEnergy_spent());
+            	}
+            	if(res.getMeasures().toUpperCase().equals("TRANSPORT")) {
+            		double carbon =120 * res.getEnergy_spent();
+            		obj.setCarbon_produced(carbon);
+            		obj.setMeasures(res.getMeasures());
+            		obj.setUnit("Kg");
+            		obj.setEnergy_consumed(res.getEnergy_spent());
+            	}
+            	carbonResList.add(obj);
+            }
+            return carbonResList;
+            
+    	}catch (Exception e) {
+            // Handle any exceptions here
+    		return null;
+        }
+    	
+    }
     
 }
