@@ -28,7 +28,7 @@ public class ExcelData {
                 switch (cellIdx) {
                     case 0:
                     	if (currentCell.getCellType() == CellType.STRING) 
-                        region.setMeasures(null);
+                        region.setMeasures(currentCell.getStringCellValue());
                         break;
                     case 1:
                     	if (currentCell.getCellType() == CellType.STRING) 

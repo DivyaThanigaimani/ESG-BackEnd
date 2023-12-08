@@ -44,7 +44,7 @@ public class regionController {
         	 return null;
         }
     }
-    @GetMapping("/carbonexcel")
+    @PostMapping("/carbonexcel")
     public ResponseEntity<List<CarbonResponseDTO>> uploadCarbonExcelFile(@RequestParam("file") MultipartFile file) {
         try {
             List<CarbonDTO> carbonList = ExcelData.readCarbonExcel(file.getInputStream());
